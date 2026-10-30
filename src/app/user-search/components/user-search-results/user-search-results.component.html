@@ -1,0 +1,32 @@
+@let currentState = state();
+<p role="status" aria-atomic="true">
+  @if (currentState.status === 'loading') {
+    Поиск пользователей…
+  } @else if (currentState.status === 'error') {
+    Ошибка загрузки
+  } @else {
+    Найдено: <strong>{{ currentState.users.length }}</strong>
+  }
+</p>
+
+<div id="user-results" [attr.aria-busy]="currentState.status === 'loading'">
+  @if (currentState.status === 'loading') {
+    <div class="user-search-results__message">
+      <mat-spinner [diameter]="32" aria-label="Загружаем пользователей"></mat-spinner>
+      <p>Загружаем пользователей…</p>
+    </div>
+  } @else if (currentState.status === 'error') {
+    <p role="alert">Не удалось загрузить пользователей. Измените запрос или очистите поиск.</p>
+  } @else if (currentState.users.length === 0) {
+    <p>Пользователи не найдены</p>
+  } @else {
+    <mat-list role="list" aria-label="Найденные пользователи">
+      @for (user of currentState.users; track user.id) {
+        <mat-list-item role="listitem">
+          <span matListItemTitle>{{ user.name }}</span>
+          <span matListItemLine>{{ user.email }}</span>
+        </mat-list-item>
+      }
+    </mat-list>
+  }
+</div>

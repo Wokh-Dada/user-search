@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  padding: 2rem 1rem;
+}
+
+.user-search {
+  max-width: 48rem;
+  margin-inline: auto;
+
+  &__content {
+    padding-block-start: 1.5rem;
+  }
+
+  &__field {
+    width: 100%;
+  }
+}

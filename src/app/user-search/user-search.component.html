@@ -1,0 +1,36 @@
+<main class="user-search">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title role="heading" aria-level="1">Пользователи</mat-card-title>
+      <mat-card-subtitle>Поиск по имени или электронной почте</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="user-search__content">
+      <mat-form-field class="user-search__field" appearance="outline">
+        <mat-label>Найти пользователя</mat-label>
+        <input
+          matInput
+          type="text"
+          role="searchbox"
+          placeholder="Имя или email"
+          autocomplete="off"
+          spellcheck="false"
+          aria-controls="user-results"
+          [formControl]="searchControl"
+        />
+        <button
+          matSuffix
+          mat-button
+          type="button"
+          aria-label="Очистить поиск"
+          [disabled]="!searchControl.value"
+          (click)="onClearSearch()"
+        >
+          Очистить
+        </button>
+      </mat-form-field>
+
+      <demo-user-search-results [state]="state()" />
+    </mat-card-content>
+  </mat-card>
+</main>
